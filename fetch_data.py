@@ -2,6 +2,9 @@ import subprocess
 import zipfile
 import os
 
+
+
+
 def fetch_data():
     # Command to download the dataset using Kaggle API
     download_command = "kaggle competitions download -c bike-sharing-demand"
@@ -21,6 +24,12 @@ def fetch_data():
     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
         zip_ref.extractall(".")
 
-    # Remove the downloaded .zip file if you don't need it anymore
-    os.remove(zip_file)
 
+    train = pd.read_csv('train.csv')
+    test = pd.read_csv('test.csv')
+    submission = pd.read_csv('test.csv')
+
+    return train, test, submission
+
+if __name__ == "__main__":
+    fetch_data()
